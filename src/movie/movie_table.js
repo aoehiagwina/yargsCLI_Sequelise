@@ -2,11 +2,6 @@ const {DataTypes} = require("sequelize");
 const  sequelize = require("../db/connection");
 
 const Movie = sequelize.define("Movie",{
-    id: {
-        type: DataTypes.NUMBER,
-        autoIncrement: true,
-        primaryKey: true
-    },
     title: {
         type: DataTypes.STRING,
         allowNull: false
@@ -19,8 +14,9 @@ const Movie = sequelize.define("Movie",{
         }
     },
     rating: {
-        type: DataTypes.NUMBER
+        type: DataTypes.INTEGER
     }
 });
 
 module.exports = Movie;
+
