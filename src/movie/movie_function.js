@@ -1,4 +1,5 @@
 
+const { where } = require("../../../MongooseProject/src/movie/movie.model");
 const Movie = require("./movie_table");
 
 exports.addMovie = async (movieObj) => {
@@ -10,18 +11,37 @@ exports.addMovie = async (movieObj) => {
     }
 };
 
-exports.update = async (movieObj) => {
+exports.add_Multiple_Movie = async (movieObj) => {
     try {
-        await Movie.update(movieObj);
+        await Movie.sync();
+        await Movie.bulkCreate([movieObj])
     } catch (error) {
         console.log(error)
     }
 };
 
-exports.delete = async (movieObj) => {
+exports.find = async (movieObj) => {
     try {
-        await Movie.destroy(movieObj);
+    await Movie.findOne({movieObj});
     } catch (error) {
         console.log(error)
     }
 };
+
+
+exports.update = async (movieObj) => {
+    try {
+    await Movie.update({movieObj}, {where: {movieObj}});
+    } catch (error) {
+        console.log(error)
+    }
+};
+
+exports.deleted = async (movieObj) => {
+    try {
+        await Movie.destroy({where: {movieObj}});
+    } catch (error) {
+        console.log(error)
+    }
+};
+
